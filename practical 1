@@ -1,0 +1,67 @@
+using System; 
+ 
+// Student Admission Management System 
+namespace StudentAdmission 
+{ 
+    // Class 
+    class Student 
+    { 
+        // Private data members (Access Modifier) 
+        private int studentId; 
+        private string studentName; 
+        private string course; 
+ 
+        // Constructor 
+        public Student(int id, string name, string courseName) 
+        { 
+            studentId = id; 
+            studentName = name; 
+            course = courseName; 
+        } 
+ 
+        // Public method to display student details 
+        public void DisplayDetails() 
+        { 
+            Console.WriteLine("\n----- Student Admission Details -----"); 
+            Console.WriteLine("Student ID   : " + studentId); 
+            Console.WriteLine("Student Name : " + studentName); 
+            Console.WriteLine("Course       : " + course); 
+        } 
+    } 
+ 
+    class Program 
+    { 
+        static void Main(string[] args) 
+        { 
+            // Variables to store user input 
+            int id; 
+            string name; 
+            string course; 
+
+ 
+ 
+ 
+            Console.WriteLine("===== Student Admission Management ====="); 
+ 
+            // Taking input from user 
+            Console.Write("Enter Student ID : "); 
+            id = Convert.ToInt32(Console.ReadLine()); 
+ 
+            Console.Write("Enter Student Name : "); 
+            name = Console.ReadLine(); 
+ 
+            Console.Write("Enter Course Name : "); 
+            course = Console.ReadLine(); 
+ 
+            // Creating object 
+            Student s1 = new Student(id, name, course); 
+ 
+            // Calling display method 
+            s1.DisplayDetails(); 
+ 
+            Console.WriteLine("\nAdmission Successful!"); 
+            Console.WriteLine("Press any key to exit..."); 
+            Console.ReadKey(); 
+        } 
+    } 
+}
