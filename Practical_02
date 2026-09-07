@@ -1,0 +1,93 @@
+using System;
+// Interface
+interface IPayroll
+{
+double GetSalary();
+}
+// Parent Class
+class Employee
+{
+public int id;
+public string name;
+// Constructor
+public Employee(int i, string n)
+{
+id = i;
+name = n;
+}
+// Virtual Method
+public virtual void ShowDetails()
+{
+Console.WriteLine("Employee ID : " + id);
+Console.WriteLine("Employee Name : " + name);
+}
+}
+// Child Class for Full Time Employee
+class FullTimeEmployee : Employee, IPayroll
+{
+double basicSalary;
+double bonus;
+public FullTimeEmployee(int i, string n, double salary, double b)
+: base(i, n)
+{
+basicSalary = salary;
+bonus = b;
+
+
+
+}
+public double GetSalary()
+{
+return basicSalary + bonus;
+}
+public override void ShowDetails()
+{
+base.ShowDetails();
+Console.WriteLine("Employee Type : Full Time");
+Console.WriteLine("Basic Salary : " + basicSalary);
+Console.WriteLine("Bonus : " + bonus);
+Console.WriteLine("Total Salary : " + GetSalary());
+}
+}
+// Child Class for Part Time Employee
+class PartTimeEmployee : Employee, IPayroll
+{
+int hours;
+double rate;
+public PartTimeEmployee(int i, string n, int h, double r)
+: base(i, n)
+{
+hours = h;
+rate = r;
+}
+public double GetSalary()
+{
+return hours * rate;
+}
+public override void ShowDetails()
+{
+base.ShowDetails();
+Console.WriteLine("Employee Type : Part Time");
+Console.WriteLine("Hours Worked : " + hours);
+Console.WriteLine("Rate Per Hour : " + rate);
+Console.WriteLine("Total Salary : " + GetSalary());
+}
+}
+// Main Class
+class Program
+{
+static void Main(string[] args)
+
+
+
+{
+Employee e1 = new FullTimeEmployee(101, "Rahul", 30000, 5000);
+Employee e2 = new PartTimeEmployee(102, "Aman", 50, 400);
+Console.WriteLine("------ Full Time Employee ------");
+e1.ShowDetails();
+Console.WriteLine();
+Console.WriteLine("------ Part Time Employee ------");
+e2.ShowDetails();
+Console.ReadLine();
+}
+}
