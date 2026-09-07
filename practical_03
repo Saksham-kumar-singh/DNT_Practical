@@ -1,0 +1,132 @@
+using System;
+class Expense
+{
+public string Category;
+public double Amount;
+public Expense(string category, double amount)
+{
+Category = category;
+Amount = amount;
+}
+public void Display()
+{
+Console.WriteLine("Category: " + Category +
+" | Amount: Rs. " + Amount);
+}
+}
+class ExpenseTracker
+{
+static Expense[] expenses = new Expense[50];
+static int count = 0;
+// Method to add an expense
+static void AddExpense()
+{
+try
+{
+Console.Write("Enter expense category: ");
+string category = Console.ReadLine();
+
+
+if (string.IsNullOrWhiteSpace(category))
+{
+throw new Exception("Category cannot be empty.");
+}
+Console.Write("Enter expense amount: ");
+double amount = Convert.ToDouble(Console.ReadLine());
+if (amount <= 0)
+{
+throw new Exception("Amount must be greater than zero.");
+}
+if (count >= expenses.Length)
+{
+throw new Exception("Expense storage is full.");
+}
+expenses[count] = new Expense(category, amount);
+count++;
+Console.WriteLine("Expense added successfully!");
+}
+catch (FormatException)
+{
+Console.WriteLine("Error: Please enter a valid amount.");
+}
+catch (Exception ex)
+{
+Console.WriteLine("Error: " + ex.Message);
+}
+}
+// Method to display expenses
+static void DisplayExpenses()
+{
+if (count == 0)
+{
+
+
+Console.WriteLine("No expenses found.");
+return;
+}
+Console.WriteLine("\n===== EXPENSE LIST =====");
+for (int i = 0; i < count; i++)
+{
+Console.Write((i + 1) + ". ");
+expenses[i].Display();
+}
+}
+// Method to calculate total
+static void CalculateTotal()
+{
+double total = 0;
+for (int i = 0; i < count; i++)
+{
+total += expenses[i].Amount;
+}
+Console.WriteLine("\nTotal Expense = Rs. " + total);
+}
+// Main method
+static void Main()
+{
+int choice = 0;
+do
+{
+Console.WriteLine("\n==========================");
+Console.WriteLine(" EXPENSE TRACKER");
+Console.WriteLine("==========================");
+Console.WriteLine("1. Add Expense");
+Console.WriteLine("2. View Expenses");
+Console.WriteLine("3. Calculate Total");
+Console.WriteLine("4. Exit");
+
+
+Console.WriteLine("=========================="); try
+{
+Console.Write("Enter your choice: ");
+choice = Convert.ToInt32(Console.ReadLine());
+switch (choice)
+{
+case 1:
+AddExpense();
+break;
+case
+2:
+DisplayExpenses();
+break;
+case
+3:
+CalculateTotal();
+break;
+case
+4:
+Console.WriteLine("Thank you for using Expense Tracker!");
+break;
+default:
+Console.WriteLine("Invalid choice. Please select 1 to 4.");
+break;
+}
+}
+catch (FormatException)
+{
+Console.WriteLine("Error: Please enter a valid menu number.");
+choice = 0;
+}
+} while (choice != 4);
+}
+}
